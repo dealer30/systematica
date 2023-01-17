@@ -35,8 +35,6 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
         `Você é ${user.role}, não possui permissão para acessar esse recurso.`,
       );
     }
-    delete user.password;
-    delete user.login;
     return user;
   }
 }

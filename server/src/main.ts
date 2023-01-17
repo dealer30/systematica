@@ -5,7 +5,7 @@ import { AppModule } from './app.module';
 import { ValidationConfig } from './config/validation.config';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, { bodyParser: false });
+  const app = await NestFactory.create(AppModule, { bodyParser: true });
 
   // habilita validação de dados de forma global
   app.useGlobalPipes(new ValidationPipe(ValidationConfig));

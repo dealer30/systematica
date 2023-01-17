@@ -1,4 +1,4 @@
-import { Entity, PrimaryKey, OneToOne, Property, Enum } from '@mikro-orm/core';
+import { Entity, PrimaryKey, Property, Enum } from '@mikro-orm/core';
 import { v4 } from 'uuid';
 
 @Entity()
@@ -22,7 +22,7 @@ export class User {
   role!: Role;
 }
 
-enum Role {
+export enum Role {
   SUPER_ADMIN = 'Super Administrator',
   ADMIN = 'Administrator',
   TECHNICAL = 'Technical Responsible',
