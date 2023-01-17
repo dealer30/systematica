@@ -10,7 +10,7 @@ import { Role } from 'src/user/entities/user.entity';
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
-  /*Rota para logar um usuário, é necessário informar o login e a senha pelo body. */
+  /*Rota para logar um usuário, é necessário informar o login e a password pelo body. */
   @UseGuards(LocalAuthGuard)
   @Post('/login')
   login(@Request() req) {

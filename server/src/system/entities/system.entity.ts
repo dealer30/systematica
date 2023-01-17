@@ -16,19 +16,19 @@ export class System {
   uuid: string = v4();
 
   @Property()
-  description: string;
+  description!: string;
 
   @Property()
-  acronym: string;
+  acronym!: string;
 
-  @Property()
+  @Property({ nullable: true })
   email: string;
 
-  @Property()
+  @Property({ nullable: true })
   url: string;
 
-  @Property()
-  status: boolean;
+  @Property({ default: true })
+  status!: boolean;
 
   @OneToMany(() => SystemUpdates, (a) => a.system)
   updates: SystemUpdates[];
@@ -40,10 +40,10 @@ export class SystemUpdates {
   id: number;
 
   @Property()
-  user_name: string;
+  user_name!: string;
 
   @Property()
-  reason: string;
+  reason!: string;
 
   @Property()
   createdAt: Date = new Date();

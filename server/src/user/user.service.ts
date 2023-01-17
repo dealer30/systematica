@@ -10,58 +10,62 @@ import { UpdateUserDto } from './dto/update-user.dto';
 export class UserService {
   constructor(
     @InjectRepository(User)
-    private readonly user_repo: EntityRepository<User>,
+    private readonly userRepository: EntityRepository<User>,
   ) {}
 
   async create(user: CreateUserDto) {
-    console.log(user);
     const hashPassword = await bcrypt.hash(user['password'], 10);
     user.password = hashPassword;
 
-    const newUser = this.user_repo.create(user);
+    const newUser = this.userRepository.create(user);
 
-    await this.user_repo.persistAndFlush(newUser);
+    await this.userRepository.persistAndFlush(newUser);
     delete newUser.password;
     return newUser;
   }
 
   async update(uuid: string, updateUserDto: UpdateUserDto) {
-    const user = await this.user_repo.findOne({ uuid });
+    const user = await this.userRepository.findOne({ uuid });
     if (!user) return null;
 
     updateUserDto.password
       ? await bcrypt.hash(updateUserDto.password, 10)
       : null;
 
-    this.user_repo.assign(user, { ...user, ...updateUserDto });
+    this.userRepository.assign(user, { ...user, ...updateUserDto });
 
-    await this.user_repo.flush();
+    await this.userRepository.flush();
 
     delete user.password;
     return user;
   }
 
   async remove(uuid: string) {
-    const user = await this.user_repo.findOne({ uuid });
+    const user = await this.userRepository.findOne({ uuid });
     if (!user) return null;
 
-    await this.user_repo.removeAndFlush(user);
+    await this.userRepository.removeAndFlush(user);
     delete user.password;
     return user;
   }
 
   async findAll({ page }: { page: number }) {
-    const users = await this.user_repo.findAll({
+    const users = await this.userRepository.findAll({
       limit: 50,
       offset: (page - 1) * 50,
     });
     if (!users) return null;
 
+    users.forEach((user) => {
+      delete user.password;
+      delete user.id;
+    });
+
     return users;
   }
 
   async findByLogin(login: string) {
-    const user = await this.user_repo.findOne({ login: login });
+    const user = await this.userRepository.findOne({ login: login });
 
     if (!user) return null;
     return user;
