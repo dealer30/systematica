@@ -45,6 +45,7 @@ export class SystemController {
       if (!system)
         throw new UnprocessableEntityException('Sistema não existe.');
 
+      delete system.updates;
       return system;
     } else {
       const systems = await this.systemService.findAll(page);
@@ -70,9 +71,11 @@ export class SystemController {
     @Body() updateSystemDto: UpdateSystemDto,
     @Request() req: any,
   ) {
+    const reason = updateSystemDto.reason;
+    delete updateSystemDto.reason;
     const updatedSystem = await this.systemService.update(
       req.user.uuid,
-      updateSystemDto.reason,
+      reason,
       uuid,
       updateSystemDto,
     );
@@ -88,12 +91,17 @@ export class SystemController {
     return await this.systemService.deactivate(uuid);
   }
 
+  /* Rota para buscar um sistema por um critério específico (acronym, description ou email). */
   @UseGuards(new JwtAuthGuard([Role.SUPER_ADMIN, Role.ADMIN, Role.TECHNICAL]))
   @Get('/search')
-  async search(@Body() query: SearchSystemDto, @Query('page') page = 1) {
-    if (!query) throw new UnprocessableEntityException('Query inválida.');
+  async search(@Body() search: SearchSystemDto, @Query('page') page = 1) {
+    if (!search) throw new UnprocessableEntityException('Query inválida.');
 
-    const systems = await this.systemService.search(page, query);
+    const systems = await this.systemService.search(
+      page,
+      search.query,
+      search.value,
+    );
 
     if (!systems)
       throw new UnprocessableEntityException('Nenhum sistema encontrado.');

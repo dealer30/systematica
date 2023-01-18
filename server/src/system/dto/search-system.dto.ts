@@ -1,15 +1,19 @@
-import { IsOptional, IsString } from 'class-validator';
+import { IsEnum, IsNotEmpty, IsString } from 'class-validator';
+
+export enum SearchSystemQuery {
+  desc = 'description',
+  acro = 'acronym',
+  email = 'email',
+}
 
 export class SearchSystemDto {
-  @IsString()
-  @IsOptional()
-  description: string;
+  @IsNotEmpty()
+  @IsEnum(SearchSystemQuery, {
+    message: 'Tipo de busca inválido, deve ser description, acronym ou email.',
+  })
+  query: SearchSystemQuery;
 
+  @IsNotEmpty()
   @IsString()
-  @IsOptional()
-  acronym: string;
-
-  @IsString()
-  @IsOptional()
-  email: string;
+  value: string;
 }

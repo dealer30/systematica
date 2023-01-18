@@ -3,14 +3,9 @@ import { InjectRepository } from '@mikro-orm/nestjs';
 import { Injectable } from '@nestjs/common';
 import { User } from 'src/user/entities/user.entity';
 import { CreateSystemDto } from './dto/create-system.dto';
+import { SearchSystemQuery } from './dto/search-system.dto';
 import { UpdateSystemDto } from './dto/update-system.dto';
 import { System, SystemUpdates } from './entities/system.entity';
-
-interface SystemQuerySearch {
-  description: string;
-  acronym: string;
-  email: string;
-}
 
 @Injectable()
 export class SystemService {
@@ -27,6 +22,8 @@ export class SystemService {
     const newSystem = this.systemRepository.create(system);
 
     await this.systemRepository.persistAndFlush(newSystem);
+
+    delete newSystem.id;
 
     return newSystem;
   }
@@ -77,7 +74,7 @@ export class SystemService {
     userUUID: string,
     reason: string,
     uuid: string,
-    data: UpdateSystemDto,
+    data: Omit<UpdateSystemDto, 'reason'>,
   ) {
     const user = await this.userRepository.findOne({ uuid: userUUID });
     if (!user) return null;
@@ -88,10 +85,12 @@ export class SystemService {
     const systemUpdates = this.systemUpdatesRepository.create({
       reason: reason,
       user_name: user.name,
-      system,
+      system: system,
     });
 
     await this.systemUpdatesRepository.persistAndFlush(systemUpdates);
+
+    delete system.updates;
 
     this.systemRepository.assign(system, { ...system, ...data });
 
@@ -115,16 +114,12 @@ export class SystemService {
     return system;
   }
 
-  async search(page: number, query: Partial<SystemQuerySearch>) {
+  async search(page: number, query: SearchSystemQuery, value: string) {
     if (!query) return null;
 
     const systems = await this.systemRepository.find(
       {
-        description: query.description
-          ? { $ilike: `%${query.description}%` }
-          : {},
-        acronym: query.acronym ? { $ilike: `%${query.acronym}%` } : {},
-        email: query.email ? { $ilike: `%${query.email}%` } : {},
+        [query]: { $like: `%${value}%` },
       },
       {
         limit: 50,
@@ -133,12 +128,16 @@ export class SystemService {
       },
     );
 
+    const counts = await this.systemRepository.count({
+      [query]: { $like: `%${value}%` },
+    });
+
     if (!systems) return null;
 
     systems.forEach((system) => {
       delete system.id;
     });
 
-    return systems;
+    return { ...systems, pages: Math.ceil(counts / 50) };
   }
 }
