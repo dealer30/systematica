@@ -13,7 +13,7 @@ import { CreateSystemDto } from './dto/create-system.dto';
 import { UpdateSystemDto } from './dto/update-system.dto';
 import { JwtAuthGuard } from 'src/auth/guard/jwt-auth.guard';
 import { Role } from 'src/user/entities/user.entity';
-import { Query, Request } from '@nestjs/common/decorators';
+import { Options, Query, Request } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { SearchSystemDto } from './dto/search-system.dto';
 
@@ -93,15 +93,11 @@ export class SystemController {
 
   /* Rota para buscar um sistema por um critério específico (acronym, description ou email). */
   @UseGuards(new JwtAuthGuard([Role.SUPER_ADMIN, Role.ADMIN, Role.TECHNICAL]))
-  @Get('/search')
+  @Post('/search')
   async search(@Body() search: SearchSystemDto, @Query('page') page = 1) {
     if (!search) throw new UnprocessableEntityException('Query inválida.');
 
-    const systems = await this.systemService.search(
-      page,
-      search.query,
-      search.value,
-    );
+    const systems = await this.systemService.search(page, search);
 
     if (!systems)
       throw new UnprocessableEntityException('Nenhum sistema encontrado.');

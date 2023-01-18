@@ -114,22 +114,25 @@ export class SystemService {
     return system;
   }
 
-  async search(page: number, query: SearchSystemQuery, value: string) {
+  async search(page: number, query: SearchSystemQuery) {
     if (!query) return null;
 
-    const systems = await this.systemRepository.find(
-      {
-        [query]: { $like: `%${value}%` },
-      },
-      {
-        limit: 50,
-        offset: (page - 1) * 50,
-        orderBy: { description: 'ASC' },
-      },
-    );
+    const queryObject = {};
+
+    for (const [key, value] of Object.entries(query)) {
+      if (!value) delete query[key];
+
+      if (key === 'description') queryObject[key] = { $like: `%${value}%` };
+    }
+
+    const systems = await this.systemRepository.find(queryObject, {
+      limit: 50,
+      offset: (page - 1) * 50,
+      orderBy: { description: 'ASC' },
+    });
 
     const counts = await this.systemRepository.count({
-      [query]: { $like: `%${value}%` },
+      ...queryObject,
     });
 
     if (!systems) return null;
