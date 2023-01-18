@@ -13,6 +13,7 @@ const RoutesApp = () => {
                 <Routes>
                     <Route path='/' element={<Login/>} />
                     <Route path='/home' element={<PrivateRoute><Home /></PrivateRoute>}/>
+                    <Route path='/system/edit/:uuid'/>
                     <Route path='*' element={<Error error={404}/>}></Route>
                 </Routes>
             </AuthProvider>
