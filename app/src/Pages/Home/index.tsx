@@ -1,10 +1,10 @@
 import { authapi } from '../../Services/api';
 import './index.css';
-import SearchForm from './SearchForm';
+import SearchContainer from './SearchContainer';
 
 function Home () {
     return (
-        <SearchForm />
+        <SearchContainer />
     )
 }
 

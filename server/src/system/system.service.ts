@@ -121,8 +121,7 @@ export class SystemService {
 
     for (const [key, value] of Object.entries(query)) {
       if (!value) delete query[key];
-
-      if (key === 'description') queryObject[key] = { $like: `%${value}%` };
+      else queryObject[key] = { $like: `%${value}%` };
     }
 
     const systems = await this.systemRepository.find(queryObject, {

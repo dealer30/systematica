@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { Navigate } from "react-router-dom";
+import loadingSvg from './loading.svg'
 
 import { AuthContext } from "../Contexts/auth";
 
@@ -11,7 +12,7 @@ export const PrivateRoute = ({children}) => {
     const {authenticated, loading} = useContext(AuthContext);
 
     if (loading) {
-        return <img src='loading.svg'/>
+        return <img src={loadingSvg}/>
     }
 
     //Se for autenticado, ele renderiza o componente na tela

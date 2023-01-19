@@ -1,0 +1,39 @@
+.system-data-body {
+    width: 90%;
+    border: 1px solid #777;
+    height: 20%;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    margin: 1.5% auto;
+    justify-content: center;
+}
+
+.system-data-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin: auto;
+}
+
+.system-data-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 70%;
+    margin: auto;
+}
+
+.system-data-item p {
+    font-size: 15px;
+    font-weight: 600;
+    color: #222;
+}
+
+.system-data-item input {
+    width: 50%;
+    border: 1px #777 solid;
+}

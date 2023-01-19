@@ -1,0 +1,16 @@
+.header-container {
+    position: relative;
+    width: 100%;
+    height: 5%;
+    display: flex;
+    background: #adadad;
+    background: linear-gradient(0deg, #adadad 0%, #ececec 100%);
+}
+
+.header-container p {
+    padding: 0.5%;
+    font-size: small;
+    font-weight: bold;
+    margin: auto 0;
+    color: #444
+}

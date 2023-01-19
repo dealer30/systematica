@@ -1,4 +1,5 @@
 import { GiPencil } from 'react-icons/gi';
+import './index.css'
 
 function EditPencil(props: any) {
     const handleClick = () => {

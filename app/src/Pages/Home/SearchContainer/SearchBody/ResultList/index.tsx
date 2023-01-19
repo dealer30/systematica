@@ -2,10 +2,10 @@ import EditPencil from "./EditPencil"
 import './index.css'
 
 function ResultList (props: any) {
-    if (props.results.length < 1) {
+    if (props.results.length < 2) {
         return (
-            <div>
-                <p>Nenhum resultado encontrado</p>
+            <div id="not-found">
+                Nenhum resultado encontrado...
             </div>
         )
     } else {
@@ -27,8 +27,8 @@ function ResultList (props: any) {
                         if (result['description']) {
                         return (
                             <tr className="result-item" key={index}>
-                                <td>{result.description}</td>
-                                <td>{result.acronym}</td>
+                                <td>{result.description.toUpperCase()}</td>
+                                <td>{result.acronym.toUpperCase()}</td>
                                 <td>{result.email}</td>
                                 <td>{result.url}</td>
                                 <td>{result.status ? 'Ativo' : 'Cancelado'}</td>
