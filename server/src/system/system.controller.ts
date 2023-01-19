@@ -4,7 +4,6 @@ import {
   Post,
   Body,
   Patch,
-  Delete,
   UseGuards,
   UnprocessableEntityException,
 } from '@nestjs/common';
@@ -13,7 +12,7 @@ import { CreateSystemDto } from './dto/create-system.dto';
 import { UpdateSystemDto } from './dto/update-system.dto';
 import { JwtAuthGuard } from 'src/auth/guard/jwt-auth.guard';
 import { Role } from 'src/user/entities/user.entity';
-import { Options, Query, Request } from '@nestjs/common';
+import { Query, Request } from '@nestjs/common';
 import { ApiTags } from '@nestjs/swagger';
 import { SearchSystemDto } from './dto/search-system.dto';
 
@@ -82,13 +81,6 @@ export class SystemController {
     if (!updatedSystem)
       throw new UnprocessableEntityException('Sistema não existe.');
     return updatedSystem;
-  }
-
-  /* Rota para desativar um sistema. */
-  @UseGuards(new JwtAuthGuard([Role.SUPER_ADMIN]))
-  @Delete('/')
-  async deactivate(@Query('uuid') uuid: string) {
-    return await this.systemService.deactivate(uuid);
   }
 
   /* Rota para buscar um sistema por um critério específico (acronym, description ou email). */

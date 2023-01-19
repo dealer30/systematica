@@ -17,7 +17,7 @@ export class CreateSystemDto {
   @IsNotEmpty()
   acronym: string;
 
-  @IsEmail('Email não é válido.')
+  @IsEmail({}, { message: 'Email inválido!' })
   @Length(1, 100)
   @IsOptional()
   email: string;

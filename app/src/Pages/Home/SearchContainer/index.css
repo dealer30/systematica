@@ -83,4 +83,18 @@
 
 #pagination-control {
     cursor: pointer;
+    text-decoration: underline;
+}
+
+#pagination-control-disabled {
+    color: #dadada;
+}
+
+#loading {
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    height: 100%;
+    width: 60px;
 }

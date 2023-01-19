@@ -5,7 +5,7 @@ function ResultList (props: any) {
     if (props.results.length < 2) {
         return (
             <div id="not-found">
-                Nenhum resultado encontrado...
+                Nenhum Sistema foi encontrado. Favor revisar os critérios da sua pesquisa!
             </div>
         )
     } else {

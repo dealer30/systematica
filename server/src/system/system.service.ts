@@ -99,21 +99,6 @@ export class SystemService {
     return { ...system, ...data };
   }
 
-  async deactivate(uuid: string) {
-    const system = await this.systemRepository.findOne({
-      uuid,
-    });
-
-    if (!system) return null;
-
-    this.systemRepository.assign(system, { status: false });
-
-    await this.systemRepository.flush();
-
-    delete system.id;
-    return system;
-  }
-
   async search(page: number, query: SearchSystemQuery) {
     if (!query) return null;
 
