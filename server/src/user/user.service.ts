@@ -13,6 +13,8 @@ export class UserService {
     private readonly userRepository: EntityRepository<User>,
   ) {}
 
+  // função que cria um usuário no banco de dados, criptografa a senha e retorna o usuário criado
+  // sem a senha para proteger a mesma.
   async create(user: CreateUserDto) {
     const hashPassword = await bcrypt.hash(user['password'], 10);
     user.password = hashPassword;
@@ -24,6 +26,8 @@ export class UserService {
     return newUser;
   }
 
+  // função que atualiza dados de um usuário específico via uuid.
+  // a senha é criptografada e o usuário é retornado sem a senha.
   async update(uuid: string, updateUserDto: UpdateUserDto) {
     const user = await this.userRepository.findOne({ uuid });
     if (!user) return null;
@@ -40,6 +44,7 @@ export class UserService {
     return user;
   }
 
+  // função que remove um usuário específico via uuid.
   async remove(uuid: string) {
     const user = await this.userRepository.findOne({ uuid });
     if (!user) return null;
@@ -49,6 +54,8 @@ export class UserService {
     return user;
   }
 
+  // função que retorna todos os usuários cadastrados no banco de dados.
+  // a senha e o id são removidos para segurança.
   async findAll({ page }: { page: number }) {
     const users = await this.userRepository.findAll({
       limit: 50,
@@ -64,6 +71,7 @@ export class UserService {
     return users;
   }
 
+  // função que retorna um usuário de acordo com o login. é utilizada no guard de autenticação.
   async findByLogin(login: string) {
     const user = await this.userRepository.findOne({ login: login });
 

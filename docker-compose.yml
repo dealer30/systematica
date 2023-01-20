@@ -1,6 +1,30 @@
 version: '3'
 
 services:
+    server:
+        container_name: server-kingspan
+        build:
+            context: ./server
+            dockerfile: Dockerfile
+        image: dev
+        ports:
+            - 3001:3001
+        depends_on:
+            - redis
+            - mysql
+        restart: unless-stopped
+    app:
+        container_name: app-kingspan
+        build:
+            context: ./app
+            dockerfile: Dockerfile
+        image: development
+        ports:
+            - 3000:3000
+        depends_on:
+            - server
+        restart: unless-stopped
+        command: npm run dev -- --host --port 3000
     redis:
         container_name: redis-kingspan
         image: redis:alpine
@@ -13,6 +37,6 @@ services:
         ports:
             - 3309:3306
         environment:
-            MYSQL_ROOT_PASSWORD: root
-            MYSQL_DATABASE: root
+            MYSQL_ROOT_PASSWORD: "root"
+            MYSQL_DATABASE: "kingspan"
         restart: unless-stopped

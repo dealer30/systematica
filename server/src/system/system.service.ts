@@ -18,6 +18,9 @@ export class SystemService {
     private readonly userRepository: EntityRepository<User>,
   ) {}
 
+  // explicação para retornar sem a id está no código fonte da entity.
+
+  // função que cria um sistema no banco de dados e retorna o sistema criado sem a id.
   async create(system: CreateSystemDto) {
     const newSystem = this.systemRepository.create(system);
 
@@ -28,6 +31,8 @@ export class SystemService {
     return newSystem;
   }
 
+  // função que atualiza dados de um sistema específico via uuid.
+  // o sistema é retornado sem a id.
   async findAll(page: number) {
     const systems = await this.systemRepository.findAll({
       limit: 50,
@@ -43,12 +48,14 @@ export class SystemService {
     return systems;
   }
 
+  // função que retorna a quantidade de páginas de sistemas.
   async getPages() {
     const pages = await this.systemRepository.count();
 
     return Math.ceil(pages / 50);
   }
 
+  // função que retorna um sistema específico via uuid.
   async findOne(uuid: string) {
     const system = await this.systemRepository.findOne({
       uuid,
@@ -70,6 +77,7 @@ export class SystemService {
     return { ...system, update };
   }
 
+  // função que atualiza dados de um sistema específico via uuid.
   async update(
     userUUID: string,
     reason: string,
@@ -99,11 +107,13 @@ export class SystemService {
     return { ...system, ...data };
   }
 
+  // função que procura por sistemas com base em uma query.
   async search(page: number, query: SearchSystemQuery) {
     if (!query) return null;
 
     const queryObject = {};
 
+    // esse é um loop que remove os valores vazios da query.
     for (const [key, value] of Object.entries(query)) {
       if (!value) delete query[key];
       else queryObject[key] = { $like: `%${value}%` };

@@ -7,8 +7,10 @@ import 'reflect-metadata';
 
 dotenv.config();
 
-// Classe muito importante, é através dela que é feito toda a configuração da API, através do .env!
-// Ela é responsável por pegar as variáveis de ambiente e passar para o NestJS.
+// Classe muito importante, é através dela que é feito toda a configuração da API, através do .env ou
+// variáveis de ambiente já incluídas na configuração do servidor.
+// Ela é responsável por pegar as variáveis de ambiente e passar para o servidor.
+
 export class ConfigService {
   constructor(private env: { [k: string]: string | undefined }) {}
 
@@ -30,6 +32,7 @@ export class ConfigService {
     return this.getValue('PORT', true);
   }
 
+  // Esse método é responsável por pegar o valor da variável de ambiente MODE, que pode ser DEV ou PROD.
   public isProduction() {
     const mode = this.getValue('MODE', true);
     return mode != 'DEV';

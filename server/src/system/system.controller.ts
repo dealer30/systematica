@@ -21,7 +21,8 @@ import { SearchSystemDto } from './dto/search-system.dto';
 export class SystemController {
   constructor(private readonly systemService: SystemService) {}
 
-  /* Rota para criação de novos sistemas. */
+  /* Rota para criação de novos sistemas.
+  De acordo com a documentação, apenas Super Administrators podem realizar essa função. */
   @UseGuards(new JwtAuthGuard([Role.SUPER_ADMIN]))
   @Post('/')
   async create(@Body() createSystemDto: CreateSystemDto) {
@@ -32,7 +33,8 @@ export class SystemController {
     return newSystem;
   }
 
-  /* Rota para listar todos os sistemas ou apenas um, caso passe o uuid no query. */
+  /* Rota para listar todos os sistemas ou apenas um, caso passe o uuid no query.
+  Todos os usuários desde que autenticados podem acessar. */
   @UseGuards(new JwtAuthGuard([Role.SUPER_ADMIN, Role.ADMIN, Role.TECHNICAL]))
   @Get('/')
   async find(
@@ -55,14 +57,16 @@ export class SystemController {
     }
   }
 
-  /* Rota para retornar a quantidade de páginas. */
+  /* Rota para retornar a quantidade de páginas de sistemas.
+   Todos os usuários desde que autenticados podem acessar.*/
   @UseGuards(new JwtAuthGuard([Role.SUPER_ADMIN, Role.ADMIN, Role.TECHNICAL]))
   @Get('/pages')
   async pages() {
     return this.systemService.getPages();
   }
 
-  /* Rota para atualização de sistemas */
+  /* Rota para atualização de sistemas.
+  Todos os usuários desde que autenticados podem acessar.*/
   @UseGuards(new JwtAuthGuard([Role.SUPER_ADMIN, Role.ADMIN, Role.TECHNICAL]))
   @Patch('/')
   async update(
@@ -83,7 +87,8 @@ export class SystemController {
     return updatedSystem;
   }
 
-  /* Rota para buscar um sistema por um critério específico (acronym, description ou email). */
+  /* Rota para buscar um sistema por um critério específico (acronym, description ou email).
+  Todos os usuários desde que autenticados podem acessar.*/
   @UseGuards(new JwtAuthGuard([Role.SUPER_ADMIN, Role.ADMIN, Role.TECHNICAL]))
   @Post('/search')
   async search(@Body() search: SearchSystemDto, @Query('page') page = 1) {

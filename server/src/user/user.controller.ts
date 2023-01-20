@@ -20,7 +20,8 @@ import { ApiTags } from '@nestjs/swagger';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  /* Rota para criação de novos usuários. */
+  /* Rota para criação de novos usuários.
+  Apenas usuários Super Administrator podem criar novos usuários. */
   @UseGuards(new JwtAuthGuard([Role.SUPER_ADMIN]))
   @Post('/')
   async create(@Body() user: CreateUserDto) {
@@ -31,7 +32,8 @@ export class UserController {
     return newUser;
   }
 
-  /* Rota para atualização de usuários */
+  /* Rota para atualização de usuários
+  Apenas usuários Super Administrator podem editar dados de usuários.*/
   @UseGuards(new JwtAuthGuard([Role.SUPER_ADMIN]))
   @Patch('/')
   async update(@Query('uuid') uuid: string, @Body() user: UpdateUserDto) {
@@ -41,7 +43,8 @@ export class UserController {
     return updatedUser;
   }
 
-  /* Rota para remoção de usuários! */
+  /* Rota para remoção de usuários!
+  Apenas usuários Super Administrator podem deletar usuários do DB.*/
   @UseGuards(new JwtAuthGuard([Role.SUPER_ADMIN]))
   @Delete('/')
   async remove(@Query('uuid') uuid: string) {
@@ -51,7 +54,8 @@ export class UserController {
     return deletedUser;
   }
 
-  /* Rota para retornar uma lista de usuários. */
+  /* Rota para retornar uma lista de usuários.
+  Apenas usuários Super Administrator podem listar os usuários.*/
   @UseGuards(new JwtAuthGuard([Role.SUPER_ADMIN]))
   @Get('/')
   async findAll(@Query('page') page: number) {
