@@ -6,6 +6,8 @@ import Container from "../../../Components/Dashboard/Container"
 import Header from "../../../Components/Dashboard/ContainerHeader"
 import Footer from "../../../Components/Dashboard/ContainerFooter"
 import loadingSvg from '../../../Routes/loading.svg'
+import { BsPlusCircle, BsEraser, BsSearch } from 'react-icons/bs'
+import { IoExitOutline } from 'react-icons/io5'
 
 function SearchContainer () {
     const [descriptionSearch, setDescriptionSearch] = useState('')
@@ -127,14 +129,14 @@ function SearchContainer () {
 
             </div>
             <Footer>
-                <button id="search-button" onClick={handleLogout}>Deslogar</button>
+                <button id="search-button" onClick={handleLogout}> <IoExitOutline id="icon"/> Deslogar</button>
                 <div>
-                <button id="search-button" onClick={handleSearch}>Pesquisar</button>
-                <button id="search-button" onClick={handleClean}>Limpar</button>
+                <button id="search-button" onClick={handleSearch}>Pesquisar <BsSearch id="icon"/></button>
+                <button id="search-button" onClick={handleClean}>Limpar <BsEraser id="icon"/></button>
                 {
                     role === 'Super Administrator' ?
                     (
-                        <button id="search-button" onClick={() => window.location.assign('../system/new')}>Novo Sistema</button>
+                        <button id="search-button" onClick={() => window.location.assign('../system/new')}>Novo Sistema <BsPlusCircle id="icon"/></button>
                         ) : null
                     }
                 </div>

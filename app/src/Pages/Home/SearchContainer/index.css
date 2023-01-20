@@ -71,7 +71,8 @@
 
 #search-button {
     margin: 0 4px;
-    justify-self: end;
+    color: #0ba706;
+    font-weight: 700;
 }
 
 .pagination-items {
