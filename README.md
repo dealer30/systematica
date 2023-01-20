@@ -1,8 +1,8 @@
 <p align="center">
-<img src="https://cdn.pixabay.com/photo/2020/07/08/17/05/gear-5384557_960_720.png" width="200" />
+<img src="https://cdn.discordapp.com/attachments/961837559980372009/1065848183298723911/image.png" width="200" />
 </p>
 
-  <p align="center">Aplicação Full-stack Sistem-Ática</p>
+  <p align="center">Aplicação Full-stack SYSTEMATICA</p>
 
 ## Description
 
