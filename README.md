@@ -1,12 +1,42 @@
+  <p align="center" style="color: red">Atenção, essa é uma aplicação em desenvolvimento.</p>
+  <p align="center" style="color: red">Falhas inesperadas podem acontecer durante a sua execução.</p>
 <p align="center">
-<img src="https://cdn.discordapp.com/attachments/961837559980372009/1065848183298723911/image.png" width="200" />
+<img src="https://cdn.discordapp.com/attachments/961837559980372009/1065848183298723911/image.png" width="500" />
 </p>
 
   <p align="center">Aplicação Full-stack SYSTEMATICA</p>
 
 ## Description
+SYSTEMATICA é uma aplicação full-stack em React e NestJS que une essas duas frameworks de front-end e back-end respectivamente para trazer um login de usuários que podem visualizar,
+editar e criar novos sistemas.
 
-Atenção, essa é uma versão em desenvolvimento, então pode apresentar bugs ou falhas inesperadas.
+## Tecnologias
+- MYSQL (Banco de dados relacional)
+- Redis (Banco de dados não relacional)
+- NestJS (Back-end)
+- React (Front-end)
+- Docker (Containerização)
+- MikroORM (ORM)
+
+## Features
+
+- [x] Login de usuários
+- [x] Visualização de sistemas
+- [x] Paginação de sistemas
+- [x] Pesquisa de sistemas
+- [x] Edição de sistemas
+- [x] Criação de sistemas
+- [x] Documentação OpenAPI
+- [x] Validações de campos
+- [ ] Estilização Completa
+- [ ] Testes unitários
+- [ ] Testes de integração
+- [ ] Testes de aceitação
+
+## Pré-requisitos
+
+- [Docker](https://www.docker.com/)
+- [Docker Compose](https://docs.docker.com/compose/install/)
 
 ## Installation
 
