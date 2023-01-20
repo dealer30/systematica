@@ -39,10 +39,14 @@ editar e criar novos sistemas.
 - [Docker Compose](https://docs.docker.com/compose/install/)
 
 ## Installation
-
-### Crie o .env na pasta do servidor:
+#### Construa os contêineres do Docker:
 ```bash
-DATABASE_URL="... de acordo com configuração do Docker."
+$ docker-compose up --build
+```
+#### Após isso, verifique o IP do Gateway do servidor Mysql e com ele,
+#### crie o .env na pasta raiz do servidor.
+```bash
+DATABASE_URL="mysql://root:root@"gateway mysql":3307/kingspan"
 PORT="3001"
 JWT_SECRET="secret"
 JWT_EXPIRES_IN="1h"
@@ -51,12 +55,9 @@ REDIS_PORT="6380"
 MODE="DEV"
 ```
 
-### Após isso, digite no terminal na pasta raiz do projeto:
-```
-$ docker-compose up
-
-após isso, entre no container do servidor e digite:
-
+#### Após isso, construa novamente os contêineres do Docker e
+#### digite isso no terminal do contêiner do servidor.
+```bash
 $ npx mikro-orm schema:fresh --seed --run
 ```
 
