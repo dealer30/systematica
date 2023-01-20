@@ -2,23 +2,23 @@ version: '3'
 
 services:
     redis:
-        container_name: redis-kingspan
+        container_name: redis-systematica
         image: redis:alpine
         ports:
             - 6380:6379
         restart: unless-stopped
     mysql:
-        container_name: mysql-kingspan
+        container_name: mysql-systematica
         image: mysql:5.7
         ports:
             - 3307:3306
         environment:
             MYSQL_ROOT_PASSWORD: "root"
-            MYSQL_DATABASE: "kingspan"
+            MYSQL_DATABASE: "systematica"
 
         restart: unless-stopped
     server:
-        container_name: server-kingspan
+        container_name: server-systematica
         build:
             context: ./server
             dockerfile: Dockerfile
@@ -30,7 +30,7 @@ services:
             - mysql
         restart: unless-stopped
     app:
-        container_name: app-kingspan
+        container_name: app-systematica
         build:
             context: ./app
             dockerfile: Dockerfile

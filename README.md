@@ -46,7 +46,7 @@ $ docker-compose up --build
 #### Após isso, verifique o IP do Gateway do servidor Mysql e com ele,
 #### crie o .env na pasta raiz do servidor.
 ```bash
-DATABASE_URL="mysql://root:root@"gateway mysql":3307/kingspan"
+DATABASE_URL="mysql://root:root@"gateway mysql":3307/systematica"
 PORT="3001"
 JWT_SECRET="secret"
 JWT_EXPIRES_IN="1h"

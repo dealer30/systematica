@@ -25,7 +25,7 @@ async function bootstrap() {
 
   // habilita o swagger
   const config = new DocumentBuilder()
-    .setTitle('Projeto Kingspan')
+    .setTitle('Systematica')
     .setDescription('UC001 - Manter Sistema')
     .setVersion('1.0')
     .addBearerAuth()
