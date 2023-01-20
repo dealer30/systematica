@@ -17,6 +17,8 @@ function SearchContainer () {
     const [role, setRole] = useState('')
     const [loading, setLoading] = useState(true)
 
+    // esse useEffect é responsável por carregar os dados da API
+    // quando o componente é montado
     useEffect(()=> {
         authapi.get('/auth/profile').then(response => {
             setRole(response.data.role)
@@ -32,6 +34,8 @@ function SearchContainer () {
         });
     }, [])
 
+    // essa função é responsável por fazer a busca
+    // ela é chamada quando o usuário clica no botão de buscar
     const handleSearch = (e: any) => {
         e.preventDefault()
 
@@ -45,6 +49,8 @@ function SearchContainer () {
         })
     }
 
+    // essa função é responsável por limpar os campos de busca
+    // ela é chamada quando o usuário clica no botão de limpar
     const handleClean = (e: any) => {
         e.preventDefault()
 
@@ -63,6 +69,8 @@ function SearchContainer () {
         });
     }
 
+    // essa função é responsável por mudar a página
+    // ela é chamada quando o usuário clica no botão de mudar de página
     const switchPage = (num: number) => {
         setPage(page + num);
 
@@ -86,15 +94,15 @@ function SearchContainer () {
                         <div className="search-query">
                             <div className="search-query-item">
                                 <p>Descrição</p>
-                                <input type="text" placeholder="Pesquisar por descrição" value={descriptionSearch} onChange={(e) => setDescriptionSearch(e.target.value)}/>
+                                <input type="text" placeholder="Pesquisar por descrição" value={descriptionSearch} maxLength={100} onChange={(e) => setDescriptionSearch(e.target.value)}/>
                             </div>
                             <div className="search-query-item">
                                 <p>Sigla</p>
-                                <input type="text" placeholder="Pesquisar por sigla" value={acronymSearch} onChange={(e) => setAcronymSearch(e.target.value)}/>
+                                <input type="text" placeholder="Pesquisar por sigla" value={acronymSearch} maxLength={10} onChange={(e) => setAcronymSearch(e.target.value)}/>
                             </div>
                             <div className="search-query-item">
                                 <p>Email</p>
-                                <input type="text" placeholder="Pesquisar por email" value={emailSearch} onChange={(e) => setEmailSearch(e.target.value)}/>
+                                <input type="text" placeholder="Pesquisar por email" value={emailSearch} maxLength={100} onChange={(e) => setEmailSearch(e.target.value)}/>
                             </div>
                         </div>
                 </div>

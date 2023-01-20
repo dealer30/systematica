@@ -2,6 +2,11 @@ import warning from './warning.svg'
 import './index.css'
 import { api } from '../../Services/api';
 
+// Esse é um componente que eu criei para mostrar erros de requisição.
+// Ele recebe o código de erro como parâmetro e mostra uma imagem de erro
+// e uma mensagem de erro.
+// Ele também verifica se o usuário está autenticado, e se estiver, ele redireciona
+// para a página de home.
 function Error (props: any) {
     const token = sessionStorage.getItem('token');
 

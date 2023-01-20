@@ -12,6 +12,20 @@ export interface NewData {
     handleSubmit: () => any;
 }
 
+// Esse é um contexto que armazena os dados do novo sistema
+// e a partir dele, é possível acessar esses dados em qualquer componente
+// que esteja dentro do provider.
+
+// O provider é o componente que envolve os componentes que precisam acessar
+// os dados do contexto.
+
+// Além disso, ele também realiza validações de regras de negócio, como
+// por exemplo, se o usuário tentar salvar um sistema sem informar a descrição
+// ou a sigla, o sistema não permite que o usuário salve o sistema.
+
+// e a partir dele também, existem funções como a handleSubmit, que é responsável
+// por realizar a submissão dos dados do novo sistema.
+
 export const NewContext = createContext<NewData>({} as NewData);
 
 const NewProvider = (props: any) => {

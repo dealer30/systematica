@@ -4,7 +4,7 @@ import loadingSvg from './loading.svg'
 
 import { AuthContext } from "../Contexts/auth";
 
-// Rota privada a autenticação do usuário.
+// Componente responsável por verificar se o usuário está autenticado.
 // @ts-ignore
 export const PrivateRoute = ({children}) => {
 
@@ -15,7 +15,8 @@ export const PrivateRoute = ({children}) => {
         return <img src={loadingSvg}/>
     }
 
-    //Se for autenticado, ele renderiza o componente na tela
+    // Se for autenticado, ele renderiza o componente na tela
+    // Se não, ele redireciona para a página de login
     if (!authenticated) {
         return <Navigate to="/" />
     }

@@ -7,6 +7,8 @@ function SystemControl() {
     const [charLeft, setCharLeft] = useState(200);
     const { update, status, handleChange, reason } = useContext(EditContext)
 
+    // essa é a função que manipula a mudança de estado da justificativa
+    // é chamada no onChange do textarea da justificativa.
     const handleReasonChange = (e: any) => {
         handleChange(e);
         setCharLeft(200 - e.target.value.length);
@@ -37,14 +39,14 @@ function SystemControl() {
                     </div>
                     <div className="system-control-item">
                         <p>Justificativa da última alteração.</p>
-                        <textarea id="reason-text" placeholder={update ? update.reason : 'Não houve alteração.'} disabled/>
+                        <textarea id="reason-text" style={{ resize: 'none' }} placeholder={update ? update.reason : 'Não houve alteração.'} disabled/>
                     </div>
                     <div className="system-control-item">
                         <div className="reason-text">
                             <p>Nova Justificativa da Alteração<b id="red-asterix"> *</b></p>
                             <p id='length-text' style={{color: charLeft === 0 ? "#e60000" : "#07aa01"}}>Quantidade de caracteres disponíveis: {charLeft}</p>
                         </div>
-                        <textarea id="reason-text" name="reason" maxLength={200} value={reason} onChange={e => handleReasonChange(e)} required={true}/>
+                        <textarea id="reason-text" name="reason" maxLength={200} style={{ resize: 'none' }} value={reason} onChange={e => handleReasonChange(e)} required={true}/>
                     </div>
                 </div>
             </div>

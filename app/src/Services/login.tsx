@@ -7,6 +7,8 @@ export interface LoginData {
     password: string;
   }
 
+// Função responsável por criar uma sessão de login.
+
 const createSessionLogin = async ({login, password}: LoginData) => {
 
     try {

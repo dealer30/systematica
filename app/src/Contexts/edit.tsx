@@ -20,6 +20,20 @@ export interface EditData {
     handleSubmit: () => any;
 }
 
+// Esse é um contexto que armazena os dados do sistema em edição
+// e a partir dele, é possível acessar esses dados em qualquer componente
+// que esteja dentro do provider.
+
+// O provider é o componente que envolve os componentes que precisam acessar
+// os dados do contexto.
+
+// Além disso, ele também realiza validações de regras de negócio, como
+// por exemplo, se o usuário tentar editar um sistema sem preencher os campos
+// obrigatórios, o sistema não permite que o usuário salve o sistema.
+
+// e a partir dele também, existem funções como a handleSubmit, que é responsável
+// por realizar a submissão dos dados do sistema em edição.
+
 export const EditContext = createContext<EditData>({} as EditData);
 
 const EditProvider = (props: any) => {

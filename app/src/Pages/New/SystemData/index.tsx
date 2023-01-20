@@ -25,7 +25,7 @@ function SystemData() {
                     </div>
                     <div className="system-data-item">
                         <p>URL</p>
-                        <input type="text" placeholder="URL" name="url" value={url} onChange={(e) => handleChange(e)}/>
+                        <input type="text" placeholder="URL" name="url" value={url} maxLength={50} onChange={(e) => handleChange(e)}/>
                     </div>
                 </div>
         </div>

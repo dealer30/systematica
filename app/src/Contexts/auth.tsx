@@ -10,23 +10,20 @@ import { authapi } from "../Services/api";
 export const AuthContext = createContext();
 
 // @ts-ignore
-export const AuthProvider = ({children}) => {
+const AuthProvider = ({children}) => {
 
     const navigate = useNavigate();
 
-    //Perfis começam como falso
-    //Apenas quando autenticados são atualizados para true
     const [authenticated, setAuthenticated] = useState(false);
-
-    //A verificação das rotas privadas é feita antes do useEffect
-    //O loading serve pra impedir isso. Só é feita a análise se o usuário está logado ou não depois do useEffect
     const [loading, setLoading] = useState(true);
 
-    //Persistência dos dados
-    //Recupera os valores no sessionStorage e deixa o usuário logado
+    // Esse useEffect é responsável por verificar se o usuário está autenticado
+    // Se estiver, ele renderiza o componente na tela
+    // Se não, ele redireciona para a página de login
+
     useEffect(() => {
 
-        //Recupera o token do SessionStorage
+        // Recupera o token do SessionStorage
         const recoveredToken = sessionStorage.getItem("token");
 
         if (recoveredToken) {
@@ -101,3 +98,5 @@ export const AuthProvider = ({children}) => {
     )
 
 }
+
+export default AuthProvider;
